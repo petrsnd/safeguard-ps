@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop"
+
 $TargetDir = (($env:PSModulePath -split ';') | Where-Object { $_.StartsWith($env:UserProfile) })[0]
 if (-not $TargetDir)
 {
@@ -12,9 +14,16 @@ if (-not (Test-Path $TargetDir))
 $ModuleName = "safeguard-ps"
 $Module = (Join-Path $PSScriptRoot "src\$ModuleName.psd1")
 
-(Get-Content $Module).replace("$($env:APPVEYOR_BUILD_VERSION).99999", "$($env:APPVEYOR_BUILD_VERSION).$($env:APPVEYOR_BUILD_NUMBER)") | Set-Content $Module
+$CodeVersion = "$($env:APPVEYOR_BUILD_VERSION).99999"
+$BuildVersion = "$($env:APPVEYOR_BUILD_VERSION).$($env:APPVEYOR_BUILD_NUMBER)"
+Write-Host "Replacing CodeVersion: $CodeVersion with BuildVersion: $BuildVersion"
+(Get-Content $Module).replace($CodeVersion, $BuildVersion) | Set-Content $Module
 
 $ModuleDef = (Invoke-Expression -Command (Get-Content $Module -Raw))
+if ($ModuleDef["$ModuleVersion"] -ne $BuildVersion)
+{
+    throw "Did not replace code version properly"
+}
 
 Write-Host "Installing '$ModuleName $($ModuleDef["ModuleVersion"])' to '$TargetDir'"
 $ModuleDir = (Join-Path $TargetDir $ModuleName)
