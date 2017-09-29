@@ -14,10 +14,8 @@ if (-not (Test-Path $TargetDir))
 $ModuleName = "safeguard-ps"
 $Module = (Join-Path $PSScriptRoot "src\$ModuleName.psd1")
 
-dir env:
-
-$CodeVersion = "$($env:APPVEYOR_BUILD_VERSION).99999"
-$BuildVersion = "$($env:APPVEYOR_BUILD_VERSION).$($env:APPVEYOR_BUILD_NUMBER)"
+$CodeVersion = "$($env:APPVEYOR_BUILD_VERSION.Split(".")[0..2] -join ".").99999"
+$BuildVersion = "$($env:APPVEYOR_BUILD_VERSION)"
 Write-Host "Replacing CodeVersion: $CodeVersion with BuildVersion: $BuildVersion"
 (Get-Content $Module).replace($CodeVersion, $BuildVersion) | Set-Content $Module
 
