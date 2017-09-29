@@ -22,7 +22,7 @@ Write-Host "Replacing CodeVersion: $CodeVersion with BuildVersion: $BuildVersion
 $ModuleDef = (Invoke-Expression -Command (Get-Content $Module -Raw))
 if ($ModuleDef["$ModuleVersion"] -ne $BuildVersion)
 {
-    throw "Did not replace code version properly"
+    throw "Did not replace code version properly, ModuleVersion is $($ModuleDef["$ModuleVersion"])"
 }
 
 Write-Host "Installing '$ModuleName $($ModuleDef["ModuleVersion"])' to '$TargetDir'"
