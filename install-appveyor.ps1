@@ -17,7 +17,7 @@ $Module = (Join-Path $PSScriptRoot "src\$ModuleName.psd1")
 $CodeVersion = "$($env:APPVEYOR_BUILD_VERSION.Split(".")[0..2] -join ".").99999"
 $BuildVersion = "$($env:APPVEYOR_BUILD_VERSION)"
 Write-Host "Replacing CodeVersion: $CodeVersion with BuildVersion: $BuildVersion"
-(Get-Content $Module).replace($CodeVersion, $BuildVersion) | Set-Content $Module
+(Get-Content $Module -Raw).replace($CodeVersion, $BuildVersion) | Set-Content $Module
 
 $ModuleDef = (Invoke-Expression -Command (Get-Content $Module -Raw))
 if ($ModuleDef["$ModuleVersion"] -ne $BuildVersion)
