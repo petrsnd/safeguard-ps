@@ -1,4 +1,4 @@
-$TargetDir = (($env:PSModulePath -split ';') | Where-Object { $_.StartsWith($env:UserProfile) })
+$TargetDir = (($env:PSModulePath -split ';') | Where-Object { $_.StartsWith($env:UserProfile) })[0]
 if (-not $TargetDir)
 {
     throw "Unable to find a PSModulePath in your user profile (" + $env:UserProfile + "), PSModulePath: " + $env:PSModulePath
@@ -11,9 +11,10 @@ if (-not (Test-Path $TargetDir))
 }
 $ModuleName = "safeguard-ps"
 $Module = (Join-Path $PSScriptRoot "src\$ModuleName.psd1")
-$ModuleDef = (Invoke-Expression -Command (Get-Content $Module -Raw))
 
-dir env:
+(Get-Content $Module).replace("$($env:APPVEYOR_BUILD_VERSION).99999", "$($env:APPVEYOR_BUILD_VERSION).$($env:APPVEYOR_BUILD_NUMBER)") | Set-Content $Module
+
+$ModuleDef = (Invoke-Expression -Command (Get-Content $Module -Raw))
 
 Write-Host "Installing '$ModuleName $($ModuleDef["ModuleVersion"])' to '$TargetDir'"
 $ModuleDir = (Join-Path $TargetDir $ModuleName)
