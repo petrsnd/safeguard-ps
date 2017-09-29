@@ -22,6 +22,10 @@ Write-Host "Replacing CodeVersion: $CodeVersion with BuildVersion: $BuildVersion
 $ModuleDef = (Invoke-Expression -Command (Get-Content $Module -Raw))
 if ($ModuleDef["$ModuleVersion"] -ne $BuildVersion)
 {
+    Write-Host -ForegroundColor Yellow "Module file"
+    Get-Content $Module
+    Write-Host -ForegroundColor Yellow "Module def"
+    $ModuleDef
     throw "Did not replace code version properly, ModuleVersion is $($ModuleDef["$ModuleVersion"])"
 }
 
