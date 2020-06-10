@@ -560,6 +560,21 @@ update this list.
 - New-SafeguardAccountGroup
 - Remove-SafeguardAccountGroup
 - Edit-SafeguardAccountGroup
+- Get-SafeguardDynamicAccountGroup
+- New-SafeguardDynamicAccountGroup
+- Edit-SafeguardDynamicAccountGroup
+- Get-SafeguardDynamicAssetGroup
+- New-SafeguardDynamicAssetGroup
+- Edit-SafeguardDynamicAssetGroup
+
+### Tags
+
+- Get-SafeguardTag
+- New-SafeguardTag
+- Edit-SafeguardTag
+- Remove-SafeguardTag
+- Get-SafeguardAssetByTag
+- Get-SafeguardAssetAccountByTag
 
 ### Policy Assets and Policy Accounts (for use in entitlements & access policies)
 

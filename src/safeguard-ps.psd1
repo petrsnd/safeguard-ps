@@ -87,6 +87,7 @@ NestedModules = @(
     'profiles.psm1',
     'directories.psm1',
     'groups.psm1',
+    'tags.psm1',
     'policies.psm1',
     'managementShell.psm1',
     'events.psm1',
@@ -215,6 +216,13 @@ FunctionsToExport = @(
     # groups.psm1 (dynamic)
     'Get-SafeguardDynamicAccountGroup','New-SafeguardDynamicAccountGroup','Edit-SafeguardDynamicAccountGroup',
     'Get-SafeguardDynamicAssetGroup','New-SafeguardDynamicAssetGroup','Edit-SafeguardDynamicAssetGroup',
+    # tags.psm1
+    'Get-SafeguardTag',
+#- New-SafeguardTag
+#- Edit-SafeguardTag
+#- Remove-SafeguardTag
+#- Get-SafeguardAssetByTag
+#- Get-SafeguardAssetAccountByTag
     # policies.psm1
     'Get-SafeguardPolicyAsset','Find-SafeguardPolicyAsset','Get-SafeguardPolicyAccount','Find-SafeguardPolicyAccount',
     'Get-SafeguardAccessPolicy','Get-SafeguardAccessPolicyScopeItem','Get-SafeguardAccessPolicyAccessRequestProperty',
