@@ -954,6 +954,9 @@ An array of strings containing IP addresses to use in subject alternative names.
 .PARAMETER DnsNames
 An array of strings containing DNS names to use in subject alternative names.
 
+.PARAMETER OutFile
+A string containing the location to save the CSR.
+
 .INPUTS
 None.
 

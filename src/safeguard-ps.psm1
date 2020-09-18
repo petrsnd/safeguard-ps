@@ -283,6 +283,7 @@ function Invoke-WithoutBody
     Write-Verbose "Parameters=$(ConvertTo-Json -InputObject $Parameters)"
     if ($InFile)
     {
+        Write-Verbose "File-based payload -- $InFile"
         if ($LongRunningTask)
         {
             $local:Response = (Invoke-WebRequest -Method $Method -Headers $Headers -Uri $local:Url `
@@ -1095,6 +1096,9 @@ A timeout value in seconds (default: 300s or 5m)
 
 .PARAMETER LongRunningTask
 A switch to specify that this method call should be handled synchronously as a long-running task.
+
+.PARAMETER ExtraHeaders
+A hash table containing additional headers to add to the request.
 
 .INPUTS
 None.
